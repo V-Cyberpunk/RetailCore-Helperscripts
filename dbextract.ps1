@@ -1,7 +1,7 @@
 $tc = Read-Host "TC Commit angeben"
 
 Expand-Archive -Force '*PreCompiledCore.zip' '.'
-cd $PSScriptRoot\PreCompiledCore\Data\MySQL\bin
+cd $PSScriptRoot\PreCompiledCore\xampp\mysql\bin
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqld.exe --defaults-file=my.ini --console"
 Start-Sleep -s 5
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqldump.exe -u root -padmin hotfixes > hotfixes.sql" -Wait
@@ -15,7 +15,7 @@ move characters_events.sql $PSScriptRoot\
 taskkill /F /IM mysqld.exe
 cd $PSScriptRoot
 Remove-Item -Path $PSScriptRoot\PreCompiledCore -Recurse -Force
-Remove-Item -Path $PSScriptRoot\*PreCompiledCore.zip
+#Remove-Item -Path $PSScriptRoot\*PreCompiledCore.zip
 
 $date = Get-Date -Format "yyyy-MM-dd"
 
