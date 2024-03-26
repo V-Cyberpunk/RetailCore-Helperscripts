@@ -1,8 +1,8 @@
 $tc = Read-Host "TC Commit angeben"
 
 Expand-Archive -Force '*PreCompiledCore.zip' '.'
-cd $PSScriptRoot\PreCompiledCore\xampp\mysql\bin
-Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqld.exe --defaults-file=my.ini --console"
+cd $PSScriptRoot\PreCompiledCore\laragon\bin\mysql\mysql-8.0.30-winx64\bin
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqld.exe --defaults-file=my.ini --console --datadir=$PSScriptRoot\PreCompiledCore\laragon\data\mysql-8"
 Start-Sleep -s 5
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqldump.exe -u root -padmin hotfixes > hotfixes.sql" -Wait
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqldump.exe -u root -padmin world > world.sql" -Wait
