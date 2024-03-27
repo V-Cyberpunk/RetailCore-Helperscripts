@@ -1,8 +1,8 @@
 $tc = Read-Host "TC Commit angeben"
 
 Expand-Archive -Force '*PreCompiledCore.zip' '.'
-cd $PSScriptRoot\PreCompiledCore\laragon\bin\mysql\mysql-8.0.30-winx64\bin
-Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqld.exe --defaults-file=my.ini --console --datadir=$PSScriptRoot\PreCompiledCore\laragon\data\mysql-8"
+cd $PSScriptRoot\PreCompiledCore\UniServerZ\core\mysql\bin
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqld_z.exe --defaults-file=$PSScriptRoot\PreCompiledCore\UniServerZ\core\mysql\my.ini --console"
 Start-Sleep -s 5
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqldump.exe -u root -padmin hotfixes > hotfixes.sql" -Wait
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c mysqldump.exe -u root -padmin world > world.sql" -Wait
@@ -12,7 +12,8 @@ move hotfixes.sql $PSScriptRoot\
 move world.sql $PSScriptRoot\
 move characters_trigger.sql $PSScriptRoot\
 move characters_events.sql $PSScriptRoot\
-taskkill /F /IM mysqld.exe
+taskkill /F /IM mysqld_z.exe
+Start-Sleep -s 5
 cd $PSScriptRoot
 Remove-Item -Path $PSScriptRoot\PreCompiledCore -Recurse -Force
 #Remove-Item -Path $PSScriptRoot\*PreCompiledCore.zip
